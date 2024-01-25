@@ -13,7 +13,17 @@ const dbPath = path.join(__dirname, 'Develop/db/db.json');
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static('./Develop/public'));
+
+// Direct the user to index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
+});
+
+// Direct the user to notes.html
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
+});
 
 // Setup API routes
 app.get('/api/notes', (req, res) => {
