@@ -18,28 +18,39 @@ app.use(express.static('public'));
 // Setup API routes
 app.get('/api/notes', (req, res) => {
     // Read the `db.json` file and return all saved notes as JSON
-    const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-    res.json(notes);
+    try {
+        const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+        res.json(notes);
+    } catch (error) {
+        res.status(500).json({ message: "Error reading notes" });
+    }
 });
 
 app.post('/api/notes', (req, res) => {
     // Receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client
-    const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-    const newNote = req.body;
-    newNote.id = notes.length + 1;
-    notes.push(newNote);
-    fs.writeFileSync(dbPath, JSON.stringify(notes));
-    res.json(newNote);
+    try {
+        const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+        const newNote = req.body;
+        newNote.id = notes.length + 1;
+        notes.push(newNote);
+        fs.writeFileSync(dbPath, JSON.stringify(notes, null, 4));
+        res.json(newNote);
+    } catch (error) {
+        res.status(500).json({ message: "Error saving the note" });
+    }
 });
 
 app.delete('/api/notes/:id', (req, res) => {
     // Delete a note from the `db.json` file by its `id` property
-    const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-    const updatedNotes = notes.filter((note) => note.id !== parseInt(req.params.id));
-    fs.writeFileSync(dbPath, JSON.stringify(updatedNotes));
-    res.json(updatedNotes);
+    try {
+        const notes = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+        const updatedNotes = notes.filter((note) => note.id !== parseInt(req.params.id));
+        fs.writeFileSync(dbPath, JSON.stringify(updatedNotes, null, 4));
+        res.json({ message: 'Note deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting the note" });
+    }
 });
-
 
 // Start the server and console log the port for the user
 app.listen(PORT, () => {
