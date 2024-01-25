@@ -44,7 +44,7 @@ const saveNote = (note) =>
     },
     body: JSON.stringify(note)
   });
-
+  
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -73,11 +73,16 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
-  console.log("Save button clicked!");
   const newNote = {
     title: noteTitle.value,
     text: noteText.value
   };
+
+  const rrRegex = /rick/i;
+  if (rrRegex.test(newNote.title)) {
+      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+  }
+
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();

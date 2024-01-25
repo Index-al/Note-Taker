@@ -1,16 +1,17 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text"
+        "title": "Grocery List",
+        "text": "- Eggs\n- Milk\n- Butter\n- Lettuce",
+        "id": 1
     },
     {
-        "title": "Test Note",
-        "text": "This is a test",
+        "title": "Workout Stretches",
+        "text": "1. Downward Dog\n2. Plank for 60s\n3. Happy baby",
         "id": 2
     },
     {
-        "title": "Test2",
-        "text": "test2 desc",
+        "title": "Brick-Laying Instructions",
+        "text": "Never gonna give you up, never gonna let you down.",
         "id": 3
     }
 ]
