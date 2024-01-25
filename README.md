@@ -21,6 +21,7 @@ After installation, visit `http://localhost:3000` in your browser to start using
 ## Demo 📸
 Check out the demo below to see the app in action!
 ![Note Taker Demo](/Assets/note-taker-demo.gif)
+
 or view it on YouTube [here](https://www.youtube.com/watch?v=9uu9rUTbjQA)!
 
 ## License 📄
